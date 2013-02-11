@@ -151,6 +151,7 @@ bot.addListener("message", function(from, to, text, message) {
             if(listId){
                 var data = {
                     name: textArray[1],
+                    desc: "Added by " + from + " through IRC.",
                     idList: listId
                 }
                 console.log(data);
@@ -168,6 +169,7 @@ bot.addListener("message", function(from, to, text, message) {
             if(listId){
                 var data = {
                     name: textArray[1],
+                    desc: "Added by " + from + " through IRC.",
                     idList: listId
                 }
                 var ret = addCard(t, data, function(url){
