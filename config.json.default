@@ -1,0 +1,13 @@
+{
+	"ircConfig" : {
+	    "channels": [""],
+	    "server": "",
+	    "botName": "",
+	    "botPasswd": ""
+	},
+    "trelloConfig" : {
+    "appKey" : "",
+    "appSecret" : "",
+    "userToken" : ""
+    }
+}

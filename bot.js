@@ -77,27 +77,6 @@ function update_data(){
 
 update_data();
 
-/*
-var boardList = {
-    data: {id:'50fe99bobf8f0642c2e001afe',
-        lists:{
-            'to do':{id: '50fe99bbf8f0642c2e001aff'},
-            'doing':{id: '50fe99bbf8f0642c2e001b00'},
-            'done':{id: '50fe99bbf8f0642c2e001b01'},
-            'ocr reference':{id: '5103a80ee660a21c2100035d'}
-        }
-    },
-    test: {id:'5113a1b3c72290cc020098fd',
-        lists:{
-            'test':{id: '5113a4362d57a9845700539c'},
-            'to do':{id: '5113a1b3c72290cc020098fe'},
-            'doing':{id: '5113a1b3c72290cc020098ff'},
-            'done':{id: '5113a1b3c72290cc02009900'}
-        }
-    }
-};
-*/
-
 function parseMessage(text){
     textArray = text.match(/'[^']+'|"[^"]+"|\S+/g);
     if (textArray){
