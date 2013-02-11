@@ -6,14 +6,15 @@
 
 #### 增加card：
 
-`idea "新的主意" "描述" "board名稱" "list名稱"`  
-`idea "新的主意" "board名稱" "list名稱"`  
+`#idea "新的主意" "board名稱" "list名稱"`  
+`#idea "新的主意" "board名稱"`  
+如果省略list名稱，預設會放到To Do的List。
 
 #### 印出目前的 board 和 list
 
-`idea boardlist`
+`#idea boardlist`
 
 #### 印出幫助
 
-`idea help`
+`#idea help`
 

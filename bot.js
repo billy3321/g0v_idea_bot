@@ -13,7 +13,7 @@ var Trello = require("node-trello");
 var nickserv = require('nickserv');
 var irc = require("irc");
 
-var re = new RegExp("^" + ircConfig.botName + '|^idea');
+var re = new RegExp("^" + ircConfig.botName + '|^#idea');
 
 var bot = new irc.Client(ircConfig.server, ircConfig.botName, {
     channels: ircConfig.channels
@@ -143,15 +143,14 @@ bot.addListener("message", function(from, to, text, message) {
         var textArray = parseMessage(text);
         console.log(textArray);
         console.log(textArray.length);
-        if(textArray.length === 5){
-            var listId = findListId(t, textArray[3], textArray[4], function(msg){
+        if(textArray.length === 4){
+            var listId = findListId(t, textArray[2], textArray[3], function(msg){
                 bot.say(to, msg);
             });
             console.log("listId1:", listId);
             if(listId){
                 var data = {
                     name: textArray[1],
-                    desc: textArray[2],
                     idList: listId
                 }
                 console.log(data);
@@ -162,8 +161,10 @@ bot.addListener("message", function(from, to, text, message) {
                 bot.say(to, from + " sorry, parse error. card add false.");
                 return false;
             }
-        }else if(textArray.length === 4){
-            var listId = findListId(t, textArray[2], textArray[3]);
+        }else if(textArray.length === 3){
+            var listId = findListId(t, textArray[2], 'to do', function(msg){
+                bot.say(to, msg);
+            });
             if(listId){
                 var data = {
                     name: textArray[1],
@@ -178,7 +179,7 @@ bot.addListener("message", function(from, to, text, message) {
             }
         }else if(textArray.length === 2){
             if(textArray[1].toLowerCase() === 'help'){
-                bot.say(to, "Add card: idea card_name [card_desc] board_name list_name");
+                bot.say(to, "Add card: idea card_name board_name [list_name]");
                 bot.say(to, "Show boards list: idea boardlist");
             }else if(textArray[1].toLowerCase() === 'boardlist'){
                 for(var i in boardList){
