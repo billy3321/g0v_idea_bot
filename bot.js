@@ -44,31 +44,35 @@ function update_data(){
                 var board_id = data[i];
                 var url = "/1/boards/" + board_id + "/name";
                 console.log(url);
-                t.get(url, function(err, data) {
-                    if(err){
-                        console.log(err);
-                    }else{
-                        console.log(data);
-                        var board_name = data['_value'].toLowerCase();
-                        boardList[board_name] = {
-                            id: board_id,
-                            lists : {}
-                        };
-                        var url = "/1/boards/" + board_id + "/lists";
-                        t.get(url, function(err, data) {
-                            if(err){
-                                console.log(err);
-                            }else{
-                                console.log(data);
-                                for(var i in data){
-                                    var list_name = data[i]['name'].toLowerCase();
-                                    var list_id = data[i]['id'];
-                                    boardList[board_name]['lists'][list_name] = {id: list_id};
+                var callback = function(board_id){
+                    return function(err, data) {
+                        if(err){
+                            console.log(err);
+                        }else{
+                            console.log(data);
+                            var board_name = data['_value'].toLowerCase();
+                            boardList[board_name] = {
+                                id: board_id,
+                                lists : {}
+                            };
+                            var url = "/1/boards/" + board_id + "/lists";
+                            console.log(url);
+                            t.get(url, function(err, data) {
+                                if(err){
+                                    console.log(err);
+                                }else{
+                                    console.log(data);
+                                    for(var i in data){
+                                        var list_name = data[i]['name'].toLowerCase();
+                                        var list_id = data[i]['id'];
+                                        boardList[board_name]['lists'][list_name] = {id: list_id};
+                                    }
                                 }
-                            }
-                        });
+                            });
+                        }
                     }
-                });
+                }(board_id);
+                t.get(url, callback);
             }
         }
     });
